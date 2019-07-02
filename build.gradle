@@ -7,7 +7,7 @@ repositories {
     maven { url 'https://maven.issizler.club/repository/maven-snapshots/' } // Use maven-releases when we release
 }
 
-group 'club.issizler' // Change this
+group 'club.issizler'
 version '0.1.0'
 
 sourceCompatibility = 1.8
@@ -16,8 +16,9 @@ dependencies {
     // Please update this to the latest version available!
     implementation "club.issizler.okyanus:api:0.1.0-SNAPSHOT"
 
-    // Not sure why that's needed
+    // These are available to us in runtime
     implementation 'org.apache.logging.log4j:log4j-api:2.8.1'
+    implementation "com.electronwill.night-config:toml:3.4.0"
 }
 
 processResources {

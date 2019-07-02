@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "mod-template",
+  "id": "okperms",
   "version": "${version}",
-  "name": "Mod Template",
-  "description": "The mod template for Okyanus",
+  "name": "OKPerms",
+  "description": "Simple Permission Mod",
   "environment": "server",
   "depends": {
     "fabricloader": ">=0.4.8",
@@ -11,7 +11,7 @@
   },
   "entrypoints": {
     "server": [
-      "club.issizler.template.TemplateMod::init"
+      "club.issizler.okperms.OKPermsMod::init"
     ]
   }
 }

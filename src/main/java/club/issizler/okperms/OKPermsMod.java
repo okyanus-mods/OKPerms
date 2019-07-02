@@ -1,13 +1,18 @@
-package club.issizler.template;
+package club.issizler.okperms;
 
 import club.issizler.okyanus.api.Mod;
 import club.issizler.okyanus.api.cmd.CommandBuilder;
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import com.electronwill.nightconfig.core.file.FileConfig;
 
-public class TemplateMod extends Mod {
+public class OKPermsMod extends Mod {
+
+    static FileConfig config;
 
     @Override
     public void init() {
-        getServer().getLogger().info("Hello, world!");
+        config = CommentedFileConfig.builder("config/okperms.toml").defaultResource("/config.toml").autosave().build();
+        config.load();
 
         registerCommand(
                 new CommandBuilder("hello")
