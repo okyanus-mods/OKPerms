@@ -10,17 +10,22 @@ import java.util.Optional;
 public class OKPermissionService implements PermissionService {
 
     private Optional<List<String>> getConfigKey(Permissible p) {
-        return OKPermsMod.config.getOptional("permissions.\"" + p.getIdentifier() + "\"");
+        return OKPermsMod.config.getOptional("permissions." + p.getIdentifier());
     }
 
     @Override
     public boolean hasPermission(Permissible permissible, String perm) {
-        Optional<List<String>> perms = getConfigKey(permissible);
+        if (permissible.getIdentifier().equals("CONSOLE"))
+            return true;
 
-        if (!perms.isPresent())
+        if (permissible.getIdentifier().equals("UNKNOWN"))
             return false;
 
-        return perms.get().indexOf(perm) == -1;
+        Optional<List<String>> perms = getConfigKey(permissible);
+
+        return perms
+                .filter(strings -> strings.indexOf(perm) != -1)
+                .isPresent();
     }
 
     @Override
@@ -32,7 +37,7 @@ public class OKPermissionService implements PermissionService {
         List<String> perms = optionalPerms.orElseGet(ArrayList::new);
 
         perms.add(perm);
-        OKPermsMod.config.set("permissions.\"" + permissible.getIdentifier() + "\"", perms);
+        OKPermsMod.config.set("permissions." + permissible.getIdentifier(), perms);
     }
 
     @Override
@@ -48,7 +53,7 @@ public class OKPermissionService implements PermissionService {
         List<String> perms = optionalPerms.get();
 
         perms.remove(perm);
-        OKPermsMod.config.set("permissions.\"" + permissible.getIdentifier() + "\"", perms);
+        OKPermsMod.config.set("permissions." + permissible.getIdentifier(), perms);
     }
 
 }

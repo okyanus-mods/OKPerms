@@ -1,0 +1,9 @@
+# This is the permissions file for OKPerms.
+# Don't forget to remove the examples
+
+[permissions]
+
+# UUID of "Admicos"
+482f3a97-1edc-47f1-a753-615f394ff457 = [
+    "test.permission"
+]
