@@ -23,9 +23,19 @@ public class OKPermissionService implements PermissionService {
 
         Optional<List<String>> perms = getConfigKey(permissible);
 
-        return perms
-                .filter(strings -> strings.indexOf(perm) != -1)
-                .isPresent();
+        if (!perms.isPresent())
+            return false;
+
+        if (perms.get().contains("*"))
+            return true;
+
+        for (String permission : perms.get()) {
+            if (permission.endsWith(".*") && perm.startsWith(permission.substring(0, permission.length() - 2))) {
+                return true;
+            }
+        }
+
+        return perms.get().contains(perm);
     }
 
     @Override
